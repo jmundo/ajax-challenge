@@ -3,11 +3,77 @@
 body {
     font-family: 'Ubuntu', 'Helvetica Neue', 'Helvetica', sans-serif;
     font-weight: 400;
+    background-image: url(../img/background.png);
+    background-attachment: fixed;
 }
 
 .product-picture {
     float: left;
-    height: 130px;
+    height: 300px;
     margin-right: 10px;
+    margin-top: 10px;
 }
+textarea {
+    resize: none;
+}
+
+.review-form {
+    padding-bottom: 10px;
+}
+
+.sort-ui, .filter-ui {
+    margin-bottom: 1em;
+}
+
+.cards {
+    margin: 0;
+    padding: 0;
+}
+
+.card {
+    list-style: none;
+    padding: 10px;
+    margin-bottom: 0.5em;
+    border: 2px solid #c9c9c9;
+    background-color: #FAFAFA;
+    border-radius: 5px;
+    clear: both;
+}
+
+.card .details {
+
+}
+
+.card .name, .card .title, .card p {
+    margin-top: 0;
+    margin-bottom: 0.25em;
+}
+
+.card .name {
+    font-size: 100%;
+    margin-bottom: 15px;
+}
+
+.card .title {
+    font-size: 125%;
+
+}
+
+.blue {
+    color: #428BCA;
+}
+
+.grey {
+    color: #CCCCCC;
+}
+
+span {
+    padding-left: .25em;
+}
+
+.add-comment {
+    display: none;
+}
+
+
 
