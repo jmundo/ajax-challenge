@@ -58,14 +58,8 @@
                 <h2>Comments <span><button class="btn-xs btn-default" ng-click="showForm()">Add Comment</button></span></h2>
                 <img src="img/ajax-spinner.gif" alt="loading animation" ng-if="inserting"/>
 
-                <!--
-                display existing comments here
-                each comment should also have UI allowing the user to vote up/down the comment
-                as well as delete it
-                 -->
-
                 <ul class="cards">
-                    <li class="card" ng-repeat="review in reviews = (reviews)">
+                    <li class="card" ng-repeat="review in reviews">
                         <div class="details">
                             <h2 class="title">{{review.title}}<span class="rating"><rating ng-model="review.rating" state-on="'glyphicon-star blue'" state-off="'glyphicon-star-empty grey'" readonly="true"></rating></span></h2>
                             <p class="name"><span class="faded">By</span> {{review.name}}</p>
