@@ -7,6 +7,15 @@ body {
     background-attachment: fixed;
 }
 
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.form-group {
+    padding-left: 0;
+}
+
 .product-picture {
     float: left;
     height: 300px;
@@ -40,10 +49,6 @@ textarea {
     clear: both;
 }
 
-.card .details {
-
-}
-
 .card .name, .card .title, .card p {
     margin-top: 0;
     margin-bottom: 0.25em;
@@ -51,8 +56,12 @@ textarea {
 
 .card .name {
     font-size: 100%;
-    margin-bottom: 15px;
+    margin-bottom: 0px;
 }
+
+.card .score {
+     margin-bottom: 15px;
+ }
 
 .card .title {
     font-size: 125%;
@@ -67,13 +76,16 @@ textarea {
     color: #CCCCCC;
 }
 
-span {
+.rating {
     padding-left: .25em;
+}
+
+.faded {
+    color: #7d7d7d;
 }
 
 .add-comment {
     display: none;
 }
-
 
 

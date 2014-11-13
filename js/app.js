@@ -6,7 +6,6 @@
 
 var reviewUrl = 'https://api.parse.com/1/classes/reviews'
 
-
 angular.module('RatingApp', ['ui.bootstrap'])
     .config(function($httpProvider) {
         $httpProvider.defaults.headers.common['X-Parse-Application-Id'] = 'pcmpF6Z96vo6cmdacQNVDYog38VQP8baYOIMLjPF';
@@ -14,13 +13,14 @@ angular.module('RatingApp', ['ui.bootstrap'])
     })
 
     .controller('RatingsController', function($scope, $http){
-        $scope.refreshReviews = function () {
-            $http.get(reviewUrl)
+        $scope.refreshReviews = function (order) {
+            $http.get(reviewUrl + order)
                 .success(function (data) {
                     $scope.reviews = data.results
                 });
         };
-        $scope.refreshReviews();
+
+        $scope.refreshReviews('?order=-score');
         $scope.newReview = {
             rating: 0,
             name: null,
@@ -40,7 +40,6 @@ angular.module('RatingApp', ['ui.bootstrap'])
                 body: document.getElementById('review').value,
                 score: 0
             };
-            console.log($scope.rate);
             $http.post(reviewUrl, review)
                 .success(function(responseData){
                     $scope.newReview.objectId = responseData.objectId;
@@ -58,19 +57,25 @@ angular.module('RatingApp', ['ui.bootstrap'])
         $scope.deleteComment = function(review) {
             $http.delete(reviewUrl + "/" + review.objectId, review)
                 .success(function(){
-                    $scope.refreshReviews();
+                    $scope.refreshReviews('');
                 });
         };
 
+
         $scope.vote = function(review, vote){
-            console.log("voted");
             if(vote == 1){
-                $http.put(reviewUrl + "/" + review.objectId, review.score ++, review);
-            } else {
-                $http.put(reviewUrl + "/" + review.objectId, review.score --, review);
+                $http.put(reviewUrl + "/" + review.objectId, {"score":{"__op":"Increment","amount":1}})
+                    .success(function(){
+                        $scope.refreshReviews('');
+                    });
+
+            } else if(review.score > 0){
+                $http.put(reviewUrl + "/" + review.objectId, {"score":{"__op":"Increment","amount":-1}})
+                    .success(function(){
+                        $scope.refreshReviews('');
+                    });
             }
-            //vote up or down and do not update!
-        }
+        };
 
         $scope.rate = 0;
         $scope.max = 5;
