@@ -21,13 +21,13 @@ angular.module('RatingApp', ['ui.bootstrap'])
         };
 
         $scope.refreshReviews('?order=-score');
+
         $scope.newReview = {
             rating: 0,
             name: null,
             title: null,
             body: null,
             score: 0
-
         };
 
         $scope.addReview = function(){
@@ -61,20 +61,11 @@ angular.module('RatingApp', ['ui.bootstrap'])
                 });
         };
 
-
-        $scope.vote = function(review, vote){
-            if(vote == 1){
-                $http.put(reviewUrl + "/" + review.objectId, {"score":{"__op":"Increment","amount":1}})
-                    .success(function(){
-                        $scope.refreshReviews('');
-                    });
-
-            } else if(review.score > 0){
-                $http.put(reviewUrl + "/" + review.objectId, {"score":{"__op":"Increment","amount":-1}})
-                    .success(function(){
-                        $scope.refreshReviews('');
-                    });
-            }
+        $scope.vote = function(review, amount){
+            $http.put(reviewUrl + "/" + review.objectId, {"score":{"__op":"Increment", "amount": amount}})
+                .success(function(){
+                    $scope.refreshReviews('');
+                });
         };
 
         $scope.rate = 0;
